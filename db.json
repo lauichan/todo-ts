@@ -1,0 +1,6 @@
+{
+  "todos": [
+    { "id": "1", "title": "a title", "content": "안녕", "isDone": false },
+    { "id": "2", "title": "a title2", "content": "안녕2", "isDone": false }
+  ]
+}
