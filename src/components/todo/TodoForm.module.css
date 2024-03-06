@@ -1,0 +1,35 @@
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.form > input {
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: 100%;
+  border-bottom: 1px dashed #ddd;
+}
+
+.form > textarea {
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: 100%;
+  font-family: inherit;
+  min-height: 100px;
+}
+
+.form > button {
+  position: absolute;
+  padding: 0.3rem 0.5rem;
+  bottom: 0.3rem;
+  right: 0.3rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 100%;
+}
