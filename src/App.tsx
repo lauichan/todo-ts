@@ -1,7 +1,14 @@
+import "./reset.css";
 import "./App.css";
+import Layout from "./components/layout/Layout";
+import TodoController from "./components/todo/TodoController";
 
 function App() {
-  return <>타입스크립트로 투두리스트 만들기</>;
+  return (
+    <Layout>
+      <TodoController />
+    </Layout>
+  );
 }
 
 export default App;
