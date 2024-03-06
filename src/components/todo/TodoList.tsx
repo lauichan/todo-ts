@@ -4,7 +4,7 @@ import styles from "./TodoList.module.css";
 type TodoListProps = {
   title: string;
   list: Todo[];
-  handleIsDone: (id: string) => void;
+  handleIsDone: (updated: Todo) => void;
   handleDeleteBtn: (id: string) => void;
 };
 
@@ -22,7 +22,7 @@ function TodoList({
           return (
             <li key={todo.id}>
               {todo.title} - {todo.content}
-              <button onClick={() => handleIsDone(todo.id)}>
+              <button onClick={() => handleIsDone(todo)}>
                 {todo.isDone ? "취소" : "완료"}
               </button>
               <button onClick={() => handleDeleteBtn(todo.id)}>삭제</button>
