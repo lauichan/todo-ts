@@ -1,4 +1,4 @@
-import { todoAPI } from "./todos";
+import { todoAPI } from "./instance";
 import { NewTodo, Todo } from "../types/todo";
 
 export const getTodos = async (): Promise<Todo[]> => {

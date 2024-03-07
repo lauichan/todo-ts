@@ -5,4 +5,4 @@ export type Todo = {
   isDone: boolean;
 };
 
-export type newTodo = Omit<Todo, "id">
+export type NewTodo = Omit<Todo, "id">
