@@ -1,41 +1,18 @@
-import { useEffect } from "react";
-import {
-  deleteTodos,
-  getTodos,
-  newTodo,
-  newTodos,
-  updateTodos,
-} from "../../apis";
-import { useAppDispatch, useAppSelector } from "../../utils/store.hooks";
-import {
-  Todo,
-  addTodo,
-  deleteTodo,
-  setTodos,
-  switchIsDone,
-} from "../../store/modules/todoSlice";
+import { addTodosApi, deleteTodosApi, updateTodosApi } from "../../apis";
+import { useMutationTodo, useQueryTodo } from "../../hooks/query";
+import { Todo, newTodo } from "../../types/todo";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 
 function TodoController() {
-  const dispatch = useAppDispatch();
+  const { data, isLoading } = useQueryTodo();
 
-  const todos: Todo[] = useAppSelector((state) => state.todos);
+  const workingList: Todo[] = data.filter((todo) => todo.isDone === false);
+  const doneList: Todo[] = data.filter((todo) => todo.isDone === true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getTodos();
-        dispatch(setTodos(data));
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const workingList: Todo[] = todos.filter((todo) => todo.isDone === false);
-  const doneList: Todo[] = todos.filter((todo) => todo.isDone === true);
+  const { mutate: mutateAddTodo } = useMutationTodo(addTodosApi);
+  const { mutate: mutateSwitchIsDone } = useMutationTodo(updateTodosApi);
+  const { mutate: mutateDeleteTodo } = useMutationTodo(deleteTodosApi);
 
   const handleAddTodo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,22 +25,21 @@ function TodoController() {
       isDone: false,
     };
 
-    const { id } = await newTodos(newTodo);
-    dispatch(addTodo({ id, ...newTodo }));
+    mutateAddTodo(newTodo);
     target.reset();
   };
 
   const handleIsDone = async (todo: Todo) => {
     const updated = { ...todo, isDone: !todo.isDone };
-    await updateTodos(updated);
-    dispatch(switchIsDone(updated));
+    mutateSwitchIsDone(updated);
   };
 
   const handleDeleteBtn = async (id: string) => {
     if (!window.confirm("삭제하시겠습니까?")) return;
-    await deleteTodos(id);
-    dispatch(deleteTodo(id));
+    mutateDeleteTodo(id);
   };
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <>
