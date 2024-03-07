@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Todo } from "../store/modules/todoSlice";
+import { Todo, newTodo } from "../types/todo";
 
-const todoAPI = axios.create({
+export const todoAPI = axios.create({
   baseURL: "http://localhost:4000",
 });
 
@@ -10,19 +10,17 @@ export const getTodos = async (): Promise<Todo[]> => {
   return response.data;
 }
 
-export type newTodo = Omit<Todo, "id">
-
-export const newTodos = async (newTodos: newTodo): Promise<Todo> => {
+export const addTodosApi = async (newTodos: newTodo): Promise<Todo> => {
   const response = await todoAPI.post("/todos", newTodos);
   return response.data;
 }
 
-export const updateTodos = async (updateTodos: Todo): Promise<Todo> => {
+export const updateTodosApi = async (updateTodos: Todo): Promise<Todo> => {
   const response = await todoAPI.patch(`/todos/${updateTodos.id}`, updateTodos);
   return response.data;
 }
 
-export const deleteTodos = async (id: string):  Promise<Todo> => {
+export const deleteTodosApi = async (id: string):  Promise<Todo> => {
   const response = await todoAPI.delete(`/todos/${id}`);
   return response.data;
 }
