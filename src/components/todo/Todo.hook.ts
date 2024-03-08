@@ -30,7 +30,7 @@ export const useTodo = () => {
     switchIsDone(updated);
   };
 
-  const handleDeleteBtn = async (id: string) => {
+  const handleDeleteBtn = async (id: Todo["id"]) => {
     if (!window.confirm("삭제하시겠습니까?")) return;
     deleteTodo(id);
   };

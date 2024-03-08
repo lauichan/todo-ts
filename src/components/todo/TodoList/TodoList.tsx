@@ -5,7 +5,7 @@ type TodoListProps = {
   title: string;
   list: Todo[];
   handleIsDone: (updated: Todo) => void;
-  handleDeleteBtn: (id: string) => void;
+  handleDeleteBtn: (id: Todo["id"]) => void;
 };
 
 function TodoList({
