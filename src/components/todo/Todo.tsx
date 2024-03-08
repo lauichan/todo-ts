@@ -1,6 +1,6 @@
 import { useTodo } from "./Todo.hook";
-import TodoForm from "./TodoForm";
-import TodoList from "./TodoList";
+import TodoForm from "./TodoForm/TodoForm";
+import TodoList from "./TodoList/TodoList";
 
 function TodoController() {
   const {
